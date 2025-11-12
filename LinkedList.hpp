@@ -92,12 +92,39 @@ public:
 		count--;
 		return true;
 	}
-	void Clear() {
+	void clear() {
 		while (removeHead()){}
 	}
 	// Operators: move and copy
-	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept;
-	LinkedList<T>& operator=(const LinkedList<T>& rhs);
+	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
+		if (this == other) return *this;
+		head = other.head;
+		tail = other.tail;
+		count = other.count;
+		// prevent memleaks
+		other.head = nullptr;
+		other.tail = nullptr;
+		other.count = 0;
+		return *this;
+	}
+
+	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
+		// setup and destruction of what was previously held by this
+		if (this == &rhs) return this;
+		clear();
+		head = nullptr;
+		tail = nullptr;
+		count = rhs.count;
+
+		// coppying over the data
+		Node* stepper = rhs.head;
+		while (stepper != nullptr){
+			addTail(stepper->data);
+			stepper = stepper->next;
+		}
+		// removing any possible mem leaks of data (like removing dangling pointers)
+		return *this;
+	}
 
 	// constructors (default, copy, move, and destructor
 	// Construction/Destruction
@@ -129,7 +156,7 @@ public:
 		other.count = 0;
 	}
 	~LinkedList() {
-		Clear();
+		clear();
 	}
 
 private:
