@@ -36,6 +36,7 @@ public:
 	const Node* getTail() const {return tail;}
 
 	// Insertion
+	/*
 	void addHead(const T& data) {
 		if (head == nullptr) {
 			head = new Node{data, nullptr, nullptr};
@@ -61,11 +62,52 @@ public:
 		}
 		count++;
 	}
+	*/
+	void addHead(const T& data) {
+		if (count == 0) {
+			head = new Node;
+			head->prev = nullptr;
+			head->next = nullptr;
+			tail = head;
+			head->data = data;
+			count++;
+		}
+		else {
+			Node* newHead = new Node;
+			newHead->data = data;
+			head->prev = newHead;
+			newHead->prev = nullptr;
+			newHead->next = head;
+			head = newHead;
+			count++;
+		}
+	}
+	void addTail(const T& data) {
+		if (count == 0) {
+			tail = new Node;
+			tail->next = nullptr;
+			tail->prev = nullptr;
+			head = tail;
+			tail->data = data;
+			count++;
+		}
+		else {
+			Node* newTail = new Node;
+			newTail->data = data;
+			tail->next = newTail;
+			newTail->next = nullptr;
+			newTail->prev = tail;
+			tail = newTail;
+			count++;
+		}
+	}
+
+
 
 	// Removal
 	bool removeHead() {
 		if (head == nullptr) return false;
-		if (count == 1) {
+		if (head && count == 1) {
 			tail = nullptr;
 			delete head;
 			count--;
@@ -79,9 +121,9 @@ public:
 	}
 	bool removeTail() {
 		if (count == 0) return false;
-		if (count == 1) {
-			tail = nullptr;
-			delete head;
+		if (tail && count == 1) {
+			head = nullptr;
+			delete tail;
 			count--;
 			return true;
 		}
@@ -94,9 +136,10 @@ public:
 	}
 	void clear() {
 		while (removeHead()){}
+		count = 0;
 	}
 	// Operators: move and copy
-	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
+	LinkedList& operator=(LinkedList&& other) noexcept {
 		if (this == &other) return *this;
 		head = other.head;
 		tail = other.tail;
@@ -108,13 +151,13 @@ public:
 		return *this;
 	}
 
-	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
+	LinkedList& operator=(const LinkedList& rhs) {
 		// setup and destruction of what was previously held by this
 		if (this == &rhs) return *this;
 		clear();
 		head = nullptr;
 		tail = nullptr;
-		count = rhs.count;
+		count = 0;
 
 		// coppying over the data
 		Node* stepper = rhs.head;
@@ -122,6 +165,7 @@ public:
 			addTail(stepper->data);
 			stepper = stepper->next;
 		}
+		count = rhs.count;
 		// removing any possible mem leaks of data (like removing dangling pointers)
 		return *this;
 	}
@@ -134,7 +178,7 @@ public:
 		count = 0;
 	}
 
-	LinkedList(const LinkedList<T>& list) { // copy constructor
+	LinkedList(const LinkedList& list) { // copy constructor
 		head = nullptr;
 		tail = nullptr;
 		count = 0;
@@ -145,8 +189,9 @@ public:
 			temp = temp->next;
 		}
 
+		count = list.count;
 	}
-	LinkedList(LinkedList<T>&& other) noexcept { // move con
+	LinkedList(LinkedList&& other) noexcept { // move con
 		head = other.head;
 		tail = other.tail;
 		count = other.count;
