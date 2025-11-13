@@ -16,6 +16,32 @@ public:
     }
 
     // possible big 5 insertion
+    LLQ(const LLQ& donor) { // copy constructor
+        list = donor.list;
+    }
+
+    LLQ(LLQ&& donor) { // move constructor
+        list = std::move(donor.list);
+    }
+
+    LLQ& operator=(const LLQ& donor) { // copy assignment
+        if (this == &donor) return *this;
+        list.clear();
+        list = donor.list;
+        return *this;
+    }
+
+    LLQ& operator=(LLQ&& donor) { // move assignment
+        if (this == &donor) return *this;
+        list.clear();
+        list = std::move(donor.list);
+        return *this;
+    }
+
+    ~LLQ() override {
+        list.clear();
+    }
+
 
     // Insertion
     void enqueue(const T& item) override {
