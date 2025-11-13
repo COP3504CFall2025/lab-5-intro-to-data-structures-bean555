@@ -18,7 +18,6 @@ public:
     LLDQ() {
         list =  LinkedList<T>();
     }
-    // maybe introduce big 5
 
     // Core Insertion Operations
     void pushFront(const T& item) override {
@@ -56,6 +55,13 @@ public:
     // Getter
     std::size_t getSize() const noexcept override {
         return list.getCount();
+    }
+
+    void printForward() {
+        list.printForward();
+    }
+    void printReverse() {
+        list.printReverse();
     }
 };
 

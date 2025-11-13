@@ -24,7 +24,7 @@ public:
 
     // Deletion
     T dequeue() override {
-        if (list.getCount() == 0) throw std::runtime_error("Queue is empty");
+        if (list.getCount() == 0) throw std::runtime_error("List is empty");
         T temp = list.getHead()->data;
         list.removeHead();
         return temp;
@@ -32,13 +32,20 @@ public:
 
     // Access
     T peek() const override {
-        if (list.getCount() == 0) throw std::runtime_error("Queue is empty");
+        if (list.getCount() == 0) throw std::runtime_error("List is empty");
         return list.getHead()->data;
     }
 
     // Getter
     std::size_t getSize() const noexcept override {
         return list.getCount();
+    }
+
+    void printForward() {
+        list.printForward();
+    }
+    void printReverse() {
+        list.printReverse();
     }
 
 };

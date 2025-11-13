@@ -15,8 +15,6 @@ public:
         list =  LinkedList<T>();
     }
 
-    // big 5 add later if needed
-
     // Insertion
     void push(const T& item) override {
         list.addHead(item);
@@ -39,5 +37,12 @@ public:
     //Getters
     std::size_t getSize() const noexcept override {
         return list.getCount();
+    }
+
+    void printForward() {
+        list.printForward();
+    }
+    void printReverse() {
+        list.printReverse();
     }
 };
