@@ -15,6 +15,33 @@ public:
         list =  LinkedList<T>();
     }
 
+    // implementing big 5
+    LLS(const LLS& donor) {
+        list = donor.list;
+    }
+
+    LLS(LLS&& donor) {
+        list = std::move(donor.list);
+    }
+
+    LLS& operator=(const LLS& donor) {
+        if (this == &donor) return *this;
+        list.clear();
+        list = donor.list;
+        return *this;
+    }
+
+    LLS& operator=(LLS&& donor) {
+        if (this == &donor) return *this;
+        list.clear();
+        list = std::move(donor.list);
+        return *this;
+    }
+
+    ~LLS() override {
+        list.clear();
+    }
+
     // Insertion
     void push(const T& item) override {
         list.addHead(item);
