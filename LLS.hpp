@@ -22,7 +22,7 @@ public:
 
     // Deletion
     T pop() override {
-        // what to do when list empty
+        if (list.getCount() == 0) throw std::runtime_error("Stack is empty");
         T temp = list.getHead()->data;
         list.removeHead();
         return temp;
@@ -36,7 +36,6 @@ public:
 
     //Getters
     std::size_t getSize() const noexcept override {
-        if (list.getCount() == 0) throw std::runtime_error("Stack is empty");
         return list.getCount();
     }
 };
