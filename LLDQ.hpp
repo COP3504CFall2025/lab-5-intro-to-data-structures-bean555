@@ -15,7 +15,9 @@ private:
 
 public:
     // Constructor
-    LLDQ() = default;
+    LLDQ() {
+        list =  LinkedList<T>();
+    }
     // maybe introduce big 5
 
     // Core Insertion Operations

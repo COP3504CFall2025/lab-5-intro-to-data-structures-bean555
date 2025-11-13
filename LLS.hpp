@@ -11,7 +11,9 @@ private:
     LinkedList<T> list;
 public:
     // Constructor
-    LLS() = default;
+    LLS() {
+        list =  LinkedList<T>();
+    }
 
     // big 5 add later if needed
 

@@ -11,7 +11,9 @@ private:
     LinkedList<T> list;
 public:
     // Constructor
-    LLQ() = default;
+    LLQ() {
+        list =  LinkedList<T>();
+    }
 
     // possible big 5 insertion
 
