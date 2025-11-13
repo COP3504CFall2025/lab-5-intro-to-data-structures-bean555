@@ -60,7 +60,6 @@ public:
         delete[] array_;
         array_ = rhs.array_;
 
-        delete[] rhs.array_;
         rhs.capacity_ = 0;
         rhs.curr_size_ = 0;
         rhs.array_ = nullptr;

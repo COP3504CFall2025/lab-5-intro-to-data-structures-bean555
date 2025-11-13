@@ -37,7 +37,7 @@ public:
         capacity_ = other.capacity_;
         curr_size_ = other.curr_size_;
         array_ = new T[capacity_];
-        for (size_t i = 0; i < capacity_; i++) {
+        for (size_t i = 0; i < curr_size_; i++) {
             array_[i] = other.array_[(other.front_ + i) % other.capacity_];
         }
         front_ = 0;
@@ -49,7 +49,7 @@ public:
         curr_size_ = rhs.curr_size_;
         delete[] array_;
         array_ = new T[capacity_];
-        for (size_t i = 0; i < capacity_; i++) {
+        for (size_t i = 0; i < curr_size_; i++) {
             array_[i] = rhs.array_[(rhs.front_ + i) % rhs.capacity_];
         }
         front_ = 0;
@@ -83,6 +83,7 @@ public:
         rhs.front_ = 0;
         rhs.back_ = 0;
         rhs.array_ = nullptr;
+        return *this;
     }
     ~ABQ() noexcept override {
         delete[] array_;
@@ -130,9 +131,9 @@ public:
         front_ = (front_ + 1) % capacity_;
         curr_size_--;
 
-        if (curr_size_ * 4 >= capacity_) {
+        if (curr_size_ * 4 <= capacity_) {
             T* tempArray = new T[capacity_ / scale_factor_];
-            for (size_t i = 0; i < capacity_ / scale_factor_; i++) {
+            for (size_t i = 0; i < curr_size_; i++) {
                 tempArray[i] = array_[(front_ + i) % capacity_];
             }
             capacity_ = capacity_ / scale_factor_;
