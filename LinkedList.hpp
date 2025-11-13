@@ -106,16 +106,17 @@ public:
 
 	// Removal
 	bool removeHead() {
-		if (head == nullptr) return false;
+		if (count == 0) return false;
 		if (head && count == 1) {
 			tail = nullptr;
 			delete head;
 			count--;
 			return true;
 		}
-		head = head->next; // pos error like mem leak
-		delete head->prev;
-		head->prev = nullptr;
+		Node* newTemp = head->next;
+		newTemp->prev = nullptr;
+		delete head;
+		head = newTemp;
 		count--;
 		return true;
 	}
