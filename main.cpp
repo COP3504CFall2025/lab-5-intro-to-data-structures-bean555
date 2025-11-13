@@ -26,8 +26,10 @@ int main() {
     // Testing files:
     std::cout << "testing LinkedList" << std::endl;
     testLinkedList();
-    //testABS();
-    //testABQ();
+    std::cout << "testing ABS" << std::endl;
+    testABS();
+    std::cout << "testing ABQ" << std::endl;
+    testABQ();
     std::cout << "testing LLS" << std::endl;
     testLLS();
     std::cout << "testing LLQ" << std::endl;
@@ -138,7 +140,7 @@ void testLinkedList() {
     std::cout << "Clearing list 4." << std::endl;
     list4.clear();
 }
-/*
+
 void testABS() {
     // Testing ABS class implementation
     // Pushing, popping, peeping, getters
@@ -237,7 +239,7 @@ void testABQ() { // Peek has issue?
     arrayBasedQueue1 = std::move(arrayBasedQueue2);
     printData<int>(arrayBasedQueue1.getData(), arrayBasedQueue1.getSize());
 }
-*/
+
 void testLLS() {
     // Testing LLS class implementation
     // Pushing, popping, peeping, getters
