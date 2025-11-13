@@ -28,14 +28,14 @@ public:
 
     // Core Removal Operations
     T popFront() override {
-        // what if list is empty
+        if (list.getCount() == 0) throw std::runtime_error("Deque is empty");
         T temp = list.getHead()->data;
         list.removeHead();
         return temp;
     }
 
     T popBack() override {
-        // what if list is empty
+        if (list.getCount() == 0) throw std::runtime_error("Deque is empty");
         T temp = list.getTail()->data;
         list.removeTail();
         return temp;
@@ -43,11 +43,11 @@ public:
 
     // Element Accessors
     const T& front() const override {
-        // what if list is empty
+        if (list.getCount() == 0) throw std::runtime_error("Deque is empty");
         return list.getHead()->data;
     }
     const T& back() const override {
-        // what if list is empty
+        if (list.getCount() == 0) throw std::runtime_error("Deque is empty");
         return list.getTail()->data;
     }
 

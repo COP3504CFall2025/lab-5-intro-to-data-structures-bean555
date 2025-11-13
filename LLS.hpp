@@ -30,12 +30,13 @@ public:
 
     // Access
     T peek() const override {
-        // what to do when list is empty
+        if (list.getCount() == 0) throw std::runtime_error("Stack is empty");
         return list.gethead()->data;
     }
 
     //Getters
     std::size_t getSize() const noexcept override {
+        if (list.getCount() == 0) throw std::runtime_error("Stack is empty");
         return list.getCount();
     }
 };

@@ -97,7 +97,7 @@ public:
 	}
 	// Operators: move and copy
 	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept {
-		if (this == other) return *this;
+		if (this == &other) return *this;
 		head = other.head;
 		tail = other.tail;
 		count = other.count;
@@ -110,7 +110,7 @@ public:
 
 	LinkedList<T>& operator=(const LinkedList<T>& rhs) {
 		// setup and destruction of what was previously held by this
-		if (this == &rhs) return this;
+		if (this == &rhs) return *this;
 		clear();
 		head = nullptr;
 		tail = nullptr;

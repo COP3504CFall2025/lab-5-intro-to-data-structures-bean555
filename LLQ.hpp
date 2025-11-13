@@ -13,6 +13,8 @@ public:
     // Constructor
     LLQ() = default;
 
+    // possible big 5 insertion
+
     // Insertion
     void enqueue(const T& item) override {
         list.addTail(item);
@@ -20,7 +22,7 @@ public:
 
     // Deletion
     T dequeue() override {
-        // what if list is empty
+        if (list.getCount() == 0) throw std::runtime_error("Queue is empty");
         T temp = list.getHead()->data;
         list.removeHead();
         return temp;
@@ -28,7 +30,7 @@ public:
 
     // Access
     T peek() const override {
-        // what if list is empty
+        if (list.getCount() == 0) throw std::runtime_error("Queue is empty");
         return list.getHead()->data;
     }
 
