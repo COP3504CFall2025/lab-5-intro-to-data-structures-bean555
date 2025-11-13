@@ -32,7 +32,7 @@ public:
     }
 
     ABS& operator=(const ABS& rhs) {
-        if (this != &rhs) return *this;
+        if (this == &rhs) return *this;
         capacity_ = rhs.capacity_;
         curr_size_ = rhs.curr_size_;
         delete[] array_;
@@ -54,7 +54,7 @@ public:
     }
 
     ABS& operator=(ABS&& rhs) noexcept {
-        if (this != &rhs) return *this;
+        if (this == &rhs) return *this;
         capacity_ = rhs.capacity_;
         curr_size_ = rhs.curr_size_;
         delete[] array_;
