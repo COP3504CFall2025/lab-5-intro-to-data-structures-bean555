@@ -62,6 +62,7 @@ public:
         size_ = other.size_;
         front_ = other.front_;
         back_ = other.back_;
+        delete[] data_;
         data_ = new T[capacity_];
         for (size_t i = 0; i < size_; i++) {
             data_[i] = other.data_[i];
@@ -74,6 +75,7 @@ public:
         size_ = other.size_;
         front_ = other.front_;
         back_ = other.back_;
+        delete[] data_;
         data_ = other.data_;
 
         other.capacity_ = 0;
@@ -136,8 +138,8 @@ public:
     }
     T popBack() override {
         if (size_ == 0) throw std::runtime_error("Empty array");
-        T temp = data_[back_];
         back_ = (back_ + capacity_ - 1) % capacity_;
+        T temp = data_[back_];
         size_--;
         return temp;
     }
@@ -149,7 +151,8 @@ public:
     }
     const T& back() const override {
         if (size_ == 0) throw std::runtime_error("Empty array");
-        return data_[back_];
+
+        return data_[(back_+capacity_-1)%capacity_];
     }
 
     // Getters
