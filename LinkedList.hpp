@@ -15,14 +15,14 @@ public:
 	// Behaviors
 	void printForward() const {
 		Node* stepper = head;
-		while (stepper != nullptr) {
+		while (stepper) {
 			std::cout << stepper->data << std::endl;
 			stepper = stepper->next;
 		}
 	}
 	void printReverse() const {
 		Node* stepper = tail;
-		while (stepper != nullptr) {
+		while (stepper) {
 			std::cout << stepper -> data << std::endl;
 			stepper = stepper->prev;
 		}
@@ -110,6 +110,7 @@ public:
 		if (head && count == 1) {
 			tail = nullptr;
 			delete head;
+			head = nullptr;
 			count--;
 			return true;
 		}
